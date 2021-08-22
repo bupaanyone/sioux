@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+func StringToPtr(s string) *string {
+	return &s
+}
+
+func TimeToPtr(t time.Time) *time.Time {
+	return &t
+}
+
 // Parse an integer (interpreted as milliseconds) to a time.Duration.
 func IntToTime(t int) time.Duration {
 	return time.Duration(t) * time.Millisecond

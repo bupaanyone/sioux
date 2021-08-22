@@ -1,6 +1,6 @@
 # Sioux - An Minimalist Self-Helped Blog
 
-### Directory Structure
+### Project Structure
 
 - dist: built distribution output.
 - server: backend source files.

@@ -39,7 +39,7 @@ func ping(c *gin.Context) {
 
 func middlewareLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		utils.SetLogIdGin(c)
+		utils.CtxSetLogIdGin(c)
 
 		start := time.Now().UnixNano()
 		c.Next()

@@ -9,14 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const contextKeyLogId = "ctx_log_id" // Key used to store log ID in a context.
+const ctxKeyLogId = "ctx_log_id" // Key used to store log ID in a context.
 
-func SetLogIdGin(c *gin.Context) {
-	c.Set(contextKeyLogId, time.Now().UnixNano())
+func CtxSetLogIdGin(c *gin.Context) {
+	c.Set(ctxKeyLogId, time.Now().UnixNano())
 }
 
-func GetLogId(ctx context.Context) int64 {
-	if raw := ctx.Value(contextKeyLogId); raw != nil {
+func CtxGetLogId(ctx context.Context) int64 {
+	if raw := ctx.Value(ctxKeyLogId); raw != nil {
 		if val, ok := raw.(int64); ok {
 			return val
 		}
@@ -29,6 +29,6 @@ func Log(ctx context.Context, format string, args ...interface{}) {
 }
 
 func Output(callDepth int, ctx context.Context, format string, args ...interface{}) {
-	args = append([]interface{}{GetLogId(ctx)}, args...)
+	args = append([]interface{}{CtxGetLogId(ctx)}, args...)
 	log.Output(callDepth+1, fmt.Sprintf("<%X> "+format, args...))
 }
